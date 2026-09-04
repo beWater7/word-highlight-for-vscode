@@ -1,0 +1,54 @@
+{
+  "name": "word-cycle-highlight",
+  "displayName": "Word Cycle Highlight",
+  "description": "Double-click a word to highlight all occurrences. New words rotate yellow → green → blue. Colors are configurable.",
+  "version": "1.4.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "wordCycleHighlight.cycle",
+        "title": "Word Highlight: Highlight Current Word"
+      },
+      {
+        "command": "wordCycleHighlight.clear",
+        "title": "Word Highlight: Clear Current Word"
+      },
+      {
+        "command": "wordCycleHighlight.clearAll",
+        "title": "Word Highlight: Clear All"
+      },
+      {
+        "command": "wordCycleHighlight.openSettings",
+        "title": "Word Highlight: Configure Colors"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "wordCycleHighlight.cycle",
+        "key": "alt+1",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "wordCycleHighlight.clear",
+        "key": "alt+2",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "wordCycleHighlight.clearAll",
+        "key": "alt+3",
+        "when": "editorTextFocus"
+      }
+    ]
+  }
+}
