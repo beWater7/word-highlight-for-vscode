@@ -1,8 +1,8 @@
 {
   "name": "word-cycle-highlight",
   "displayName": "Word Cycle Highlight",
-  "description": "Double-click a word to highlight all its occurrences. New words cycle through yellow, green and blue.",
-  "version": "1.4.0",
+  "description": "Highlight a word and all its occurrences. New words cycle through yellow, green and blue. Optional double-click to toggle.",
+  "version": "1.5.0",
   "publisher": "local",
   "license": "MIT",
   "icon": "images/icon.png",

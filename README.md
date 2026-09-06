@@ -6,22 +6,23 @@ Spot every occurrence of a word in your code — and keep up to three different 
 
 ## Why
 
-Most highlighters only show you **one** word. This extension lets you track several: double-click `alpha`, then `beta`, then `gamma` — each word is highlighted everywhere it appears, and each new word automatically gets the **next color** from a rotating palette:
+Most highlighters only show you **one** word. This extension lets you track several: highlight `alpha`, then `beta`, then `gamma` — each word is highlighted everywhere it appears, and each new word automatically gets the **next color** from a rotating palette:
 
 `yellow → green → blue → yellow → …`
 
 ## Features
 
-- **One click, all occurrences** — double-click any identifier and every occurrence in the current file is highlighted instantly.
+- **Highlight whole words instantly** — add the word under the cursor with `Alt+1` (or the command palette) and every occurrence in the current file is highlighted.
 - **Multi-word tracking** — highlight up to three words simultaneously; each new word takes the next color, so you can visually tell them apart at a glance.
-- **Click to toggle off** — double-click an already-highlighted word again to remove it.
+- **Click to toggle off** — add an already-highlighted word again to remove it.
+- **Optional double-click** — turning on *double-click highlight* in the Configure menu lets you toggle a word just by double-clicking it. **Off by default.**
 - **Follows your edits** — highlights update live as you type or scroll, and each document keeps its own state.
 - **Scrollbar overview markers** — tinted marks on the scrollbar show where the highlighted words are.
-- **No JSON to edit** — colors, opacity and the underline are configured through a Quick Pick menu.
+- **No JSON to edit** — colors, opacity, underline and double-click behavior are configured through a Quick Pick menu.
 
 ## Getting started
 
-Select a word with the mouse (a double-click is the quickest way) to toggle its highlight. Alternatively use the commands or key bindings below.
+Use the commands or key bindings below to highlight the word under the cursor.
 
 ### Commands
 
@@ -30,7 +31,7 @@ Select a word with the mouse (a double-click is the quickest way) to toggle its 
 | `Word Highlight: Highlight Current Word` | Add the word under the cursor to the highlight cycle |
 | `Word Highlight: Clear Current Word` | Remove the word under the cursor |
 | `Word Highlight: Clear All` | Clear every highlight in the active file |
-| `Word Highlight: Configure Colors` | Open the Quick Pick to tune colors, opacity and underline |
+| `Word Highlight: Configure Colors` | Open the Quick Pick to tune colors, opacity, underline and double-click highlighting |
 
 ### Default key bindings
 
@@ -42,6 +43,23 @@ Select a word with the mouse (a double-click is the quickest way) to toggle its 
 
 All key bindings can be remapped in VS Code Keyboard Shortcuts, and every command is available from the Command Palette (`Ctrl+Shift+P`).
 
+### Change the shortcuts
+
+The defaults are not locked — every binding above is just a starting point you can override (extension keybindings are always user-editable in VS Code).
+
+**Quickest way:** open **Keyboard Shortcuts** (`Ctrl+K Ctrl+S`), search for `word highlight`, click the row of the command you want, press your new combination, then confirm.
+
+**Precise way:** run *Preferences: Open Keyboard Shortcuts (JSON)* and edit `keybindings.json`. For example, to *replace* the default `Alt+1` binding of *Highlight Current Word* with `Ctrl+Alt+H`:
+
+```json
+// 1. Add your own binding
+{ "key": "ctrl+alt+h", "command": "wordCycleHighlight.cycle", "when": "editorTextFocus" },
+// 2. Remove the extension's default Alt+1 binding (command prefixed with "-")
+{ "key": "alt+1", "command": "-wordCycleHighlight.cycle", "when": "editorTextFocus" }
+```
+
+The three command ids you may want to rebind are `wordCycleHighlight.cycle` (default `Alt+1`), `wordCycleHighlight.clear` (default `Alt+2`) and `wordCycleHighlight.clearAll` (default `Alt+3`).
+
 ## How the colors cycle
 
 | Highlighted word | Color | Default |
@@ -52,7 +70,16 @@ All key bindings can be remapped in VS Code Keyboard Shortcuts, and every comman
 
 The next highlighted word wraps back to yellow. Each color is configurable, together with the highlight **opacity** (default `0.34`) and the **2px underline** under each occurrence.
 
-> **Configuring:** run `Word Highlight: Configure Colors` and pick a color or opacity in the Quick Pick. Settings are stored per-machine in VS Code global state — there is no `settings.json` entry to manage.
+> **Configuring:** run `Word Highlight: Configure Colors` and pick a color, opacity, underline or double-click highlighting in the Quick Pick. Settings are stored per-machine in VS Code global state — there is no `settings.json` entry to manage.
+
+## Double-click highlighting
+
+Double-clicking a word to toggle its highlight is **off by default**. To enable it:
+
+1. Run `Word Highlight: Configure Colors` (or bind it to a key).
+2. Choose **Turn double-click highlight on**.
+
+With it on, double-clicking any identifier toggles its highlight — double-click again to remove it. Turn it off the same way if double-clicks in the editor start feeling too eager.
 
 ## What counts as a word
 
@@ -60,7 +87,7 @@ Words are matched as code identifiers (`letters`, `digits` and `_`, starting wit
 
 ## Notes & tips
 
-- Highlighting is mouse-selection based (e.g. double-click). Keyboard cursor movement does **not** trigger a toggle, but the commands and `Alt+1`/`Alt+2` always work.
+- By default, highlighting is triggered by the `Alt+1`/`Alt+2` bindings and the commands — keyboard cursor movement never triggers a highlight. Mouse double-click toggling is opt-in (see above).
 - Highlights are tracked **per document**; switching files keeps each file's highlights intact.
 - Long lists of highlights are also painted in the editor's overview ruler for quick navigation.
 

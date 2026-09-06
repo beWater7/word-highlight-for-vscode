@@ -6,7 +6,8 @@ const DEFAULTS = {
   color2: '#22C55E',
   color3: '#3B82F6',
   opacity: 0.34,
-  showUnderline: true
+  showUnderline: true,
+  mouseToggle: false
 };
 const STATE_KEY = 'wordCycleHighlight.settings';
 
@@ -67,7 +68,8 @@ function loadSettings() {
     color2: saved && saved.color2 ? saved.color2 : DEFAULTS.color2,
     color3: saved && saved.color3 ? saved.color3 : DEFAULTS.color3,
     opacity: saved && Number.isFinite(saved.opacity) ? saved.opacity : DEFAULTS.opacity,
-    showUnderline: saved && typeof saved.showUnderline === 'boolean' ? saved.showUnderline : DEFAULTS.showUnderline
+    showUnderline: saved && typeof saved.showUnderline === 'boolean' ? saved.showUnderline : DEFAULTS.showUnderline,
+    mouseToggle: saved && typeof saved.mouseToggle === 'boolean' ? saved.mouseToggle : DEFAULTS.mouseToggle
   };
 }
 
@@ -209,11 +211,22 @@ async function configureSettings() {
       {
         label: settings.showUnderline ? 'Turn underline off' : 'Turn underline on',
         key: 'showUnderline'
+      },
+      {
+        label: settings.mouseToggle ? 'Turn double-click highlight off' : 'Turn double-click highlight on',
+        key: 'mouseToggle',
+        description: settings.mouseToggle ? 'enabled' : 'disabled'
       }
     ],
     { placeHolder: 'Word highlight settings' }
   );
   if (!pick) {
+    return;
+  }
+
+  if (pick.key === 'mouseToggle') {
+    settings.mouseToggle = !settings.mouseToggle;
+    await saveSettings(settings);
     return;
   }
 
@@ -318,6 +331,9 @@ function currentWord(editor) {
 }
 
 function onSelectionChange(event) {
+  if (!loadSettings().mouseToggle) {
+    return;
+  }
   if (event.kind !== vscode.TextEditorSelectionChangeKind.Mouse) {
     return;
   }
