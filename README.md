@@ -12,7 +12,7 @@ Most highlighters only show you **one** word. This extension lets you track seve
 
 ## Features
 
-- **Highlight whole words instantly** — add the word under the cursor with `Alt+1` (or the command palette) and every occurrence in the current file is highlighted.
+- **Highlight whole words instantly** — add the word under the cursor with `Space` then `1` (or the command palette) and every occurrence in the current file is highlighted.
 - **Multi-word tracking** — highlight up to three words simultaneously; each new word takes the next color, so you can visually tell them apart at a glance.
 - **Click to toggle off** — add an already-highlighted word again to remove it.
 - **Optional double-click** — turning on *double-click highlight* in the Configure menu lets you toggle a word just by double-clicking it. **Off by default.**
@@ -37,9 +37,9 @@ Use the commands or key bindings below to highlight the word under the cursor.
 
 | Keys | Action |
 | --- | --- |
-| `Alt+1` | Highlight the current word |
-| `Alt+2` | Clear the current word |
-| `Alt+3` | Clear all highlights in the file |
+| `Space` then `1` | Highlight the current word |
+| `Space` then `2` | Clear the current word |
+| `Space` then `3` | Clear all highlights in the file |
 
 All key bindings can be remapped in VS Code Keyboard Shortcuts, and every command is available from the Command Palette (`Ctrl+Shift+P`).
 
@@ -49,16 +49,16 @@ The defaults are not locked — every binding above is just a starting point you
 
 **Quickest way:** open **Keyboard Shortcuts** (`Ctrl+K Ctrl+S`), search for `word highlight`, click the row of the command you want, press your new combination, then confirm.
 
-**Precise way:** run *Preferences: Open Keyboard Shortcuts (JSON)* and edit `keybindings.json`. For example, to *replace* the default `Alt+1` binding of *Highlight Current Word* with `Ctrl+Alt+H`:
+**Precise way:** run *Preferences: Open Keyboard Shortcuts (JSON)* and edit `keybindings.json`. For example, to *replace* the default `Space` then `1` binding of *Highlight Current Word* with `Ctrl+Alt+H`:
 
 ```json
 // 1. Add your own binding
 { "key": "ctrl+alt+h", "command": "wordCycleHighlight.cycle", "when": "editorTextFocus" },
-// 2. Remove the extension's default Alt+1 binding (command prefixed with "-")
-{ "key": "alt+1", "command": "-wordCycleHighlight.cycle", "when": "editorTextFocus" }
+// 2. Remove the extension's default Space-then-1 binding (command prefixed with "-")
+{ "key": "space 1", "command": "-wordCycleHighlight.cycle", "when": "editorTextFocus" }
 ```
 
-The three command ids you may want to rebind are `wordCycleHighlight.cycle` (default `Alt+1`), `wordCycleHighlight.clear` (default `Alt+2`) and `wordCycleHighlight.clearAll` (default `Alt+3`).
+The three command ids you may want to rebind are `wordCycleHighlight.cycle` (default `Space` then `1`), `wordCycleHighlight.clear` (default `Space` then `2`) and `wordCycleHighlight.clearAll` (default `Space` then `3`).
 
 ## How the colors cycle
 
@@ -87,7 +87,7 @@ Words are matched as code identifiers (`letters`, `digits` and `_`, starting wit
 
 ## Notes & tips
 
-- By default, highlighting is triggered by the `Alt+1`/`Alt+2` bindings and the commands — keyboard cursor movement never triggers a highlight. Mouse double-click toggling is opt-in (see above).
+- By default, highlighting is triggered by the `Space` then `1`/`2`/`3` bindings and the commands — keyboard cursor movement never triggers a highlight. Mouse double-click toggling is opt-in (see above).
 - Highlights are tracked **per document**; switching files keeps each file's highlights intact.
 - Long lists of highlights are also painted in the editor's overview ruler for quick navigation.
 
