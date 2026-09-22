@@ -2,7 +2,7 @@
   "name": "word-cycle-highlight",
   "displayName": "Word Cycle Highlight",
   "description": "Highlight a word and all its occurrences. New words cycle through yellow, green and blue. Optional double-click to toggle.",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "publisher": "local",
   "license": "MIT",
   "icon": "images/icon.png",
@@ -49,17 +49,17 @@
     "keybindings": [
       {
         "command": "wordCycleHighlight.cycle",
-        "key": "space 1",
+        "key": "alt+q 1",
         "when": "editorTextFocus"
       },
       {
         "command": "wordCycleHighlight.clear",
-        "key": "space 2",
+        "key": "alt+q 2",
         "when": "editorTextFocus"
       },
       {
         "command": "wordCycleHighlight.clearAll",
-        "key": "space 3",
+        "key": "alt+q 3",
         "when": "editorTextFocus"
       }
     ]
